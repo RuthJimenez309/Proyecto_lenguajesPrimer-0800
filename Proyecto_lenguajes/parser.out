@@ -1,0 +1,475 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COLUMNA
+    DEGREE
+    PERCENT
+    TBL
+    VAL
+
+Grammar
+
+Rule 0     S' -> cons
+Rule 1     cons -> SL cols TILDE tbl wh
+Rule 2     cols -> col
+Rule 3     cols -> col MINUS col
+Rule 4     cols -> ALLT
+Rule 5     cols -> subcons
+Rule 6     subcons -> LPAREN SL cols TILDE tbl wh RPAREN
+Rule 7     col -> IDENT
+Rule 8     tbl -> IDENT
+Rule 9     wh -> WH cond
+Rule 10    cond -> wh cond
+Rule 11    cond -> col op val
+Rule 12    cond -> cond AMPERSAND cond
+Rule 13    op -> EQUALS
+Rule 14    op -> LESS_THAN
+Rule 15    op -> GREATER_THAN
+Rule 16    op -> LESS_THAN_OR_EQUAL
+Rule 17    op -> GREATER_THAN_OR_EQUAL
+Rule 18    val -> CHAR_LITERAL
+Rule 19    val -> INT_LITERAL
+Rule 20    val -> FLOAT_LITERAL
+
+Terminals, with rules where they appear
+
+ALLT                 : 4
+AMPERSAND            : 12
+CHAR_LITERAL         : 18
+COLUMNA              : 
+DEGREE               : 
+EQUALS               : 13
+FLOAT_LITERAL        : 20
+GREATER_THAN         : 15
+GREATER_THAN_OR_EQUAL : 17
+IDENT                : 7 8
+INT_LITERAL          : 19
+LESS_THAN            : 14
+LESS_THAN_OR_EQUAL   : 16
+LPAREN               : 6
+MINUS                : 3
+PERCENT              : 
+RPAREN               : 6
+SL                   : 1 6
+TBL                  : 
+TILDE                : 1 6
+VAL                  : 
+WH                   : 9
+error                : 
+
+Nonterminals, with rules where they appear
+
+col                  : 2 3 3 11
+cols                 : 1 6
+cond                 : 9 10 12 12
+cons                 : 0
+op                   : 11
+subcons              : 5
+tbl                  : 1 6
+val                  : 11
+wh                   : 1 6 10
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . cons
+    (1) cons -> . SL cols TILDE tbl wh
+
+    SL              shift and go to state 2
+
+    cons                           shift and go to state 1
+
+state 1
+
+    (0) S' -> cons .
+
+
+
+state 2
+
+    (1) cons -> SL . cols TILDE tbl wh
+    (2) cols -> . col
+    (3) cols -> . col MINUS col
+    (4) cols -> . ALLT
+    (5) cols -> . subcons
+    (7) col -> . IDENT
+    (6) subcons -> . LPAREN SL cols TILDE tbl wh RPAREN
+
+    ALLT            shift and go to state 5
+    IDENT           shift and go to state 7
+    LPAREN          shift and go to state 8
+
+    cols                           shift and go to state 3
+    col                            shift and go to state 4
+    subcons                        shift and go to state 6
+
+state 3
+
+    (1) cons -> SL cols . TILDE tbl wh
+
+    TILDE           shift and go to state 9
+
+
+state 4
+
+    (2) cols -> col .
+    (3) cols -> col . MINUS col
+
+    TILDE           reduce using rule 2 (cols -> col .)
+    MINUS           shift and go to state 10
+
+
+state 5
+
+    (4) cols -> ALLT .
+
+    TILDE           reduce using rule 4 (cols -> ALLT .)
+
+
+state 6
+
+    (5) cols -> subcons .
+
+    TILDE           reduce using rule 5 (cols -> subcons .)
+
+
+state 7
+
+    (7) col -> IDENT .
+
+    MINUS           reduce using rule 7 (col -> IDENT .)
+    TILDE           reduce using rule 7 (col -> IDENT .)
+    EQUALS          reduce using rule 7 (col -> IDENT .)
+    LESS_THAN       reduce using rule 7 (col -> IDENT .)
+    GREATER_THAN    reduce using rule 7 (col -> IDENT .)
+    LESS_THAN_OR_EQUAL reduce using rule 7 (col -> IDENT .)
+    GREATER_THAN_OR_EQUAL reduce using rule 7 (col -> IDENT .)
+
+
+state 8
+
+    (6) subcons -> LPAREN . SL cols TILDE tbl wh RPAREN
+
+    SL              shift and go to state 11
+
+
+state 9
+
+    (1) cons -> SL cols TILDE . tbl wh
+    (8) tbl -> . IDENT
+
+    IDENT           shift and go to state 13
+
+    tbl                            shift and go to state 12
+
+state 10
+
+    (3) cols -> col MINUS . col
+    (7) col -> . IDENT
+
+    IDENT           shift and go to state 7
+
+    col                            shift and go to state 14
+
+state 11
+
+    (6) subcons -> LPAREN SL . cols TILDE tbl wh RPAREN
+    (2) cols -> . col
+    (3) cols -> . col MINUS col
+    (4) cols -> . ALLT
+    (5) cols -> . subcons
+    (7) col -> . IDENT
+    (6) subcons -> . LPAREN SL cols TILDE tbl wh RPAREN
+
+    ALLT            shift and go to state 5
+    IDENT           shift and go to state 7
+    LPAREN          shift and go to state 8
+
+    cols                           shift and go to state 15
+    col                            shift and go to state 4
+    subcons                        shift and go to state 6
+
+state 12
+
+    (1) cons -> SL cols TILDE tbl . wh
+    (9) wh -> . WH cond
+
+    WH              shift and go to state 17
+
+    wh                             shift and go to state 16
+
+state 13
+
+    (8) tbl -> IDENT .
+
+    WH              reduce using rule 8 (tbl -> IDENT .)
+
+
+state 14
+
+    (3) cols -> col MINUS col .
+
+    TILDE           reduce using rule 3 (cols -> col MINUS col .)
+
+
+state 15
+
+    (6) subcons -> LPAREN SL cols . TILDE tbl wh RPAREN
+
+    TILDE           shift and go to state 18
+
+
+state 16
+
+    (1) cons -> SL cols TILDE tbl wh .
+
+    $end            reduce using rule 1 (cons -> SL cols TILDE tbl wh .)
+
+
+state 17
+
+    (9) wh -> WH . cond
+    (10) cond -> . wh cond
+    (11) cond -> . col op val
+    (12) cond -> . cond AMPERSAND cond
+    (9) wh -> . WH cond
+    (7) col -> . IDENT
+
+    WH              shift and go to state 17
+    IDENT           shift and go to state 7
+
+    cond                           shift and go to state 19
+    wh                             shift and go to state 20
+    col                            shift and go to state 21
+
+state 18
+
+    (6) subcons -> LPAREN SL cols TILDE . tbl wh RPAREN
+    (8) tbl -> . IDENT
+
+    IDENT           shift and go to state 13
+
+    tbl                            shift and go to state 22
+
+state 19
+
+    (9) wh -> WH cond .
+    (12) cond -> cond . AMPERSAND cond
+
+    $end            reduce using rule 9 (wh -> WH cond .)
+    WH              reduce using rule 9 (wh -> WH cond .)
+    IDENT           reduce using rule 9 (wh -> WH cond .)
+    RPAREN          reduce using rule 9 (wh -> WH cond .)
+    AMPERSAND       shift and go to state 23
+
+
+state 20
+
+    (10) cond -> wh . cond
+    (10) cond -> . wh cond
+    (11) cond -> . col op val
+    (12) cond -> . cond AMPERSAND cond
+    (9) wh -> . WH cond
+    (7) col -> . IDENT
+
+    WH              shift and go to state 17
+    IDENT           shift and go to state 7
+
+    wh                             shift and go to state 20
+    cond                           shift and go to state 24
+    col                            shift and go to state 21
+
+state 21
+
+    (11) cond -> col . op val
+    (13) op -> . EQUALS
+    (14) op -> . LESS_THAN
+    (15) op -> . GREATER_THAN
+    (16) op -> . LESS_THAN_OR_EQUAL
+    (17) op -> . GREATER_THAN_OR_EQUAL
+
+    EQUALS          shift and go to state 26
+    LESS_THAN       shift and go to state 27
+    GREATER_THAN    shift and go to state 28
+    LESS_THAN_OR_EQUAL shift and go to state 29
+    GREATER_THAN_OR_EQUAL shift and go to state 30
+
+    op                             shift and go to state 25
+
+state 22
+
+    (6) subcons -> LPAREN SL cols TILDE tbl . wh RPAREN
+    (9) wh -> . WH cond
+
+    WH              shift and go to state 17
+
+    wh                             shift and go to state 31
+
+state 23
+
+    (12) cond -> cond AMPERSAND . cond
+    (10) cond -> . wh cond
+    (11) cond -> . col op val
+    (12) cond -> . cond AMPERSAND cond
+    (9) wh -> . WH cond
+    (7) col -> . IDENT
+
+    WH              shift and go to state 17
+    IDENT           shift and go to state 7
+
+    cond                           shift and go to state 32
+    wh                             shift and go to state 20
+    col                            shift and go to state 21
+
+state 24
+
+    (10) cond -> wh cond .
+    (12) cond -> cond . AMPERSAND cond
+
+  ! shift/reduce conflict for AMPERSAND resolved as shift
+    $end            reduce using rule 10 (cond -> wh cond .)
+    WH              reduce using rule 10 (cond -> wh cond .)
+    IDENT           reduce using rule 10 (cond -> wh cond .)
+    RPAREN          reduce using rule 10 (cond -> wh cond .)
+    AMPERSAND       shift and go to state 23
+
+  ! AMPERSAND       [ reduce using rule 10 (cond -> wh cond .) ]
+
+
+state 25
+
+    (11) cond -> col op . val
+    (18) val -> . CHAR_LITERAL
+    (19) val -> . INT_LITERAL
+    (20) val -> . FLOAT_LITERAL
+
+    CHAR_LITERAL    shift and go to state 34
+    INT_LITERAL     shift and go to state 35
+    FLOAT_LITERAL   shift and go to state 36
+
+    val                            shift and go to state 33
+
+state 26
+
+    (13) op -> EQUALS .
+
+    CHAR_LITERAL    reduce using rule 13 (op -> EQUALS .)
+    INT_LITERAL     reduce using rule 13 (op -> EQUALS .)
+    FLOAT_LITERAL   reduce using rule 13 (op -> EQUALS .)
+
+
+state 27
+
+    (14) op -> LESS_THAN .
+
+    CHAR_LITERAL    reduce using rule 14 (op -> LESS_THAN .)
+    INT_LITERAL     reduce using rule 14 (op -> LESS_THAN .)
+    FLOAT_LITERAL   reduce using rule 14 (op -> LESS_THAN .)
+
+
+state 28
+
+    (15) op -> GREATER_THAN .
+
+    CHAR_LITERAL    reduce using rule 15 (op -> GREATER_THAN .)
+    INT_LITERAL     reduce using rule 15 (op -> GREATER_THAN .)
+    FLOAT_LITERAL   reduce using rule 15 (op -> GREATER_THAN .)
+
+
+state 29
+
+    (16) op -> LESS_THAN_OR_EQUAL .
+
+    CHAR_LITERAL    reduce using rule 16 (op -> LESS_THAN_OR_EQUAL .)
+    INT_LITERAL     reduce using rule 16 (op -> LESS_THAN_OR_EQUAL .)
+    FLOAT_LITERAL   reduce using rule 16 (op -> LESS_THAN_OR_EQUAL .)
+
+
+state 30
+
+    (17) op -> GREATER_THAN_OR_EQUAL .
+
+    CHAR_LITERAL    reduce using rule 17 (op -> GREATER_THAN_OR_EQUAL .)
+    INT_LITERAL     reduce using rule 17 (op -> GREATER_THAN_OR_EQUAL .)
+    FLOAT_LITERAL   reduce using rule 17 (op -> GREATER_THAN_OR_EQUAL .)
+
+
+state 31
+
+    (6) subcons -> LPAREN SL cols TILDE tbl wh . RPAREN
+
+    RPAREN          shift and go to state 37
+
+
+state 32
+
+    (12) cond -> cond AMPERSAND cond .
+    (12) cond -> cond . AMPERSAND cond
+
+  ! shift/reduce conflict for AMPERSAND resolved as shift
+    $end            reduce using rule 12 (cond -> cond AMPERSAND cond .)
+    WH              reduce using rule 12 (cond -> cond AMPERSAND cond .)
+    IDENT           reduce using rule 12 (cond -> cond AMPERSAND cond .)
+    RPAREN          reduce using rule 12 (cond -> cond AMPERSAND cond .)
+    AMPERSAND       shift and go to state 23
+
+  ! AMPERSAND       [ reduce using rule 12 (cond -> cond AMPERSAND cond .) ]
+
+
+state 33
+
+    (11) cond -> col op val .
+
+    AMPERSAND       reduce using rule 11 (cond -> col op val .)
+    $end            reduce using rule 11 (cond -> col op val .)
+    WH              reduce using rule 11 (cond -> col op val .)
+    IDENT           reduce using rule 11 (cond -> col op val .)
+    RPAREN          reduce using rule 11 (cond -> col op val .)
+
+
+state 34
+
+    (18) val -> CHAR_LITERAL .
+
+    AMPERSAND       reduce using rule 18 (val -> CHAR_LITERAL .)
+    $end            reduce using rule 18 (val -> CHAR_LITERAL .)
+    WH              reduce using rule 18 (val -> CHAR_LITERAL .)
+    IDENT           reduce using rule 18 (val -> CHAR_LITERAL .)
+    RPAREN          reduce using rule 18 (val -> CHAR_LITERAL .)
+
+
+state 35
+
+    (19) val -> INT_LITERAL .
+
+    AMPERSAND       reduce using rule 19 (val -> INT_LITERAL .)
+    $end            reduce using rule 19 (val -> INT_LITERAL .)
+    WH              reduce using rule 19 (val -> INT_LITERAL .)
+    IDENT           reduce using rule 19 (val -> INT_LITERAL .)
+    RPAREN          reduce using rule 19 (val -> INT_LITERAL .)
+
+
+state 36
+
+    (20) val -> FLOAT_LITERAL .
+
+    AMPERSAND       reduce using rule 20 (val -> FLOAT_LITERAL .)
+    $end            reduce using rule 20 (val -> FLOAT_LITERAL .)
+    WH              reduce using rule 20 (val -> FLOAT_LITERAL .)
+    IDENT           reduce using rule 20 (val -> FLOAT_LITERAL .)
+    RPAREN          reduce using rule 20 (val -> FLOAT_LITERAL .)
+
+
+state 37
+
+    (6) subcons -> LPAREN SL cols TILDE tbl wh RPAREN .
+
+    TILDE           reduce using rule 6 (subcons -> LPAREN SL cols TILDE tbl wh RPAREN .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for AMPERSAND in state 24 resolved as shift
+WARNING: shift/reduce conflict for AMPERSAND in state 32 resolved as shift
